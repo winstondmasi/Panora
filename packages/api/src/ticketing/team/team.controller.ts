@@ -22,12 +22,11 @@ import { TeamService } from './services/team.service';
 import { ConnectionUtils } from '@@core/connections/@utils';
 import { ApiKeyAuthGuard } from '@@core/auth/guards/api-key.guard';
 import { UnifiedTicketingTeamOutput } from './types/model.unified';
-import { FetchObjectsQueryDto } from '@@core/utils/dtos/fetch-objects-query.dto';
+import { QueryDto } from '@@core/utils/dtos/query.dto';
 import {
   ApiGetCustomResponse,
   ApiPaginatedResponse,
 } from '@@core/utils/dtos/openapi.respone.dto';
-
 
 @ApiTags('ticketing/teams')
 @Controller('ticketing/teams')
@@ -56,7 +55,7 @@ export class TeamController {
   @UsePipes(new ValidationPipe({ transform: true, disableErrorMessages: true }))
   async getTeams(
     @Headers('x-connection-token') connection_token: string,
-    @Query() query: FetchObjectsQueryDto,
+    @Query() query: QueryDto,
   ) {
     try {
       const { linkedUserId, remoteSource, connectionId, projectId } =

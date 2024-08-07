@@ -22,12 +22,11 @@ import { TagService } from './services/tag.service';
 import { ConnectionUtils } from '@@core/connections/@utils';
 import { UnifiedTicketingTagOutput } from './types/model.unified';
 import { ApiKeyAuthGuard } from '@@core/auth/guards/api-key.guard';
-import { FetchObjectsQueryDto } from '@@core/utils/dtos/fetch-objects-query.dto';
+import { QueryDto } from '@@core/utils/dtos/query.dto';
 import {
   ApiGetCustomResponse,
   ApiPaginatedResponse,
 } from '@@core/utils/dtos/openapi.respone.dto';
-
 
 @ApiTags('ticketing/tags')
 @Controller('ticketing/tags')
@@ -56,7 +55,7 @@ export class TagController {
   @UsePipes(new ValidationPipe({ transform: true, disableErrorMessages: true }))
   async getTags(
     @Headers('x-connection-token') connection_token: string,
-    @Query() query: FetchObjectsQueryDto,
+    @Query() query: QueryDto,
   ) {
     try {
       const { linkedUserId, remoteSource, connectionId, projectId } =

@@ -1,7 +1,7 @@
 import { LoggerService } from '@@core/@core-services/logger/logger.service';
 import { ApiKeyAuthGuard } from '@@core/auth/guards/api-key.guard';
 import { ConnectionUtils } from '@@core/connections/@utils';
-import { FetchObjectsQueryDto } from '@@core/utils/dtos/fetch-objects-query.dto';
+import { QueryDto } from '@@core/utils/dtos/query.dto';
 
 import {
   Controller,
@@ -56,7 +56,7 @@ export class ContactController {
   @UsePipes(new ValidationPipe({ transform: true, disableErrorMessages: true }))
   async getContacts(
     @Headers('x-connection-token') connection_token: string,
-    @Query() query: FetchObjectsQueryDto,
+    @Query() query: QueryDto,
   ) {
     try {
       const { linkedUserId, remoteSource, connectionId, projectId } =

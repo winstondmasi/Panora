@@ -29,14 +29,13 @@ import {
 } from './types/model.unified';
 import { ConnectionUtils } from '@@core/connections/@utils';
 import { ApiKeyAuthGuard } from '@@core/auth/guards/api-key.guard';
-import { FetchObjectsQueryDto } from '@@core/utils/dtos/fetch-objects-query.dto';
+import { QueryDto } from '@@core/utils/dtos/query.dto';
 import {
   ApiGetCustomResponse,
   ApiPaginatedResponse,
   ApiPostCustomResponse,
 } from '@@core/utils/dtos/openapi.respone.dto';
 import { UnifiedCrmContactOutput } from '@crm/contact/types/model.unified';
-
 
 @ApiTags('ticketing/tickets')
 @Controller('ticketing/tickets')
@@ -65,7 +64,7 @@ export class TicketController {
   @UsePipes(new ValidationPipe({ transform: true, disableErrorMessages: true }))
   async getTickets(
     @Headers('x-connection-token') connection_token: string,
-    @Query() query: FetchObjectsQueryDto,
+    @Query() query: QueryDto,
   ) {
     try {
       const { linkedUserId, remoteSource, connectionId, projectId } =

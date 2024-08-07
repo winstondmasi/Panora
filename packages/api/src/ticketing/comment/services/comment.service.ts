@@ -319,9 +319,7 @@ export class CommentService {
       });
 
       // Convert the map to an array of objects
-      const field_mappings = Array.from(fieldMappingsMap, ([key, value]) => ({
-        [key]: value,
-      }));*/
+      const field_mappings = Object.fromEntries(fieldMappingsMap);*/
 
       // Fetch attachment IDs associated with the ticket
       const attachments = await this.prisma.tcg_attachments.findMany({
@@ -456,10 +454,8 @@ export class CommentService {
           });
 
           // Convert the map to an array of objects
-          const field_mappings = Array.from(
-            fieldMappingsMap,
-            ([key, value]) => ({ [key]: value }),
-          );*/
+          // Convert the map to an object
+const field_mappings = Object.fromEntries(fieldMappingsMap);*/
             const attachments = await this.prisma.tcg_attachments.findMany({
               where: {
                 id_tcg_ticket: comment.id_tcg_ticket,

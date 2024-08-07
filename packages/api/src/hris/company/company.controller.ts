@@ -24,7 +24,7 @@ import { UnifiedHrisCompanyOutput } from './types/model.unified';
 import { ConnectionUtils } from '@@core/connections/@utils';
 import { ApiKeyAuthGuard } from '@@core/auth/guards/api-key.guard';
 import { CompanyService } from './services/company.service';
-import { FetchObjectsQueryDto } from '@@core/utils/dtos/fetch-objects-query.dto';
+import { QueryDto } from '@@core/utils/dtos/query.dto';
 import {
   ApiGetCustomResponse,
   ApiPaginatedResponse,
@@ -58,7 +58,7 @@ export class CompanyController {
   @Get()
   async getCompanies(
     @Headers('x-connection-token') connection_token: string,
-    @Query() query: FetchObjectsQueryDto,
+    @Query() query: QueryDto,
   ) {
     try {
       const { linkedUserId, remoteSource, connectionId, projectId } =

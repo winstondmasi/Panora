@@ -27,7 +27,7 @@ import {
 } from './types/model.unified';
 import { ConnectionUtils } from '@@core/connections/@utils';
 import { ApiKeyAuthGuard } from '@@core/auth/guards/api-key.guard';
-import { FetchObjectsQueryDto } from '@@core/utils/dtos/fetch-objects-query.dto';
+import { QueryDto } from '@@core/utils/dtos/query.dto';
 import {
   ApiGetCustomResponse,
   ApiPaginatedResponse,
@@ -61,7 +61,7 @@ export class ExpenseController {
   @Get()
   async getExpenses(
     @Headers('x-connection-token') connection_token: string,
-    @Query() query: FetchObjectsQueryDto,
+    @Query() query: QueryDto,
   ) {
     try {
       const { linkedUserId, remoteSource, connectionId, projectId } =
@@ -167,6 +167,7 @@ export class ExpenseController {
       return this.expenseService.addExpense(
         unifiedExpenseData,
         connectionId,
+        projectId,
         remoteSource,
         linkedUserId,
         remote_data,

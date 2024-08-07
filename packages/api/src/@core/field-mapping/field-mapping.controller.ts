@@ -44,7 +44,7 @@ export class FieldMappingController {
   @UseGuards(JwtAuthGuard)
   @ApiExcludeEndpoint()
   @Get('internal/entities')
-  getEntities() {
+  getInternalEntities() {
     return this.fieldMappingService.getEntities();
   }
 
@@ -56,7 +56,7 @@ export class FieldMappingController {
   @ApiExcludeEndpoint()
   @Get('internal/attributes')
   @UseGuards(JwtAuthGuard)
-  getAttributes(@Request() req: any) {
+  getInternalAttributes(@Request() req: any) {
     const { id_project } = req.user;
     return this.fieldMappingService.getAttributes(id_project);
   }
@@ -69,7 +69,7 @@ export class FieldMappingController {
   @ApiExcludeEndpoint()
   @Get('internal/values')
   @UseGuards(JwtAuthGuard)
-  getValues() {
+  getInternalValues() {
     return this.fieldMappingService.getValues();
   }
 
@@ -91,6 +91,69 @@ export class FieldMappingController {
       defineTargetFieldDto,
       id_project,
     );
+  }
+
+  @ApiOperation({ operationId: 'map', summary: 'Map Custom Field' })
+  @ApiBody({ type: MapFieldToProviderDto })
+  @ApiPostCustomResponse(CustomFieldResponse)
+  @UseGuards(JwtAuthGuard)
+  @ApiExcludeEndpoint()
+  @Post('internal/map')
+  mapInternalFieldToProvider(
+    @Body() mapFieldToProviderDto: MapFieldToProviderDto,
+  ) {
+    return this.fieldMappingService.mapFieldToProvider(mapFieldToProviderDto);
+  }
+
+  @ApiOperation({
+    operationId: 'defineCustomField',
+    summary: 'Create Custom Field',
+  })
+  @ApiExcludeEndpoint()
+  @ApiBody({ type: CustomFieldCreateDto })
+  @ApiPostCustomResponse(CustomFieldResponse)
+  @Post('internal')
+  @UseGuards(JwtAuthGuard)
+  createInternalCustomField(
+    @Request() req: any,
+    @Body() data: CustomFieldCreateDto,
+  ) {
+    const { id_project } = req.user;
+    return this.fieldMappingService.createCustomField(data, id_project);
+  }
+
+  @ApiOperation({
+    operationId: 'getFieldMappingValues',
+    summary: 'Retrieve field mappings values',
+  })
+  @ApiResponse({ status: 200 })
+  @Get('values')
+  @UseGuards(ApiKeyAuthGuard)
+  getValues() {
+    return this.fieldMappingService.getValues();
+  }
+
+  @ApiOperation({
+    operationId: 'getFieldMappingsEntities',
+    summary: 'Retrieve field mapping entities',
+  })
+  @ApiResponse({ status: 200 })
+  @UseGuards(ApiKeyAuthGuard)
+  @Get('entities')
+  getEntities() {
+    return this.fieldMappingService.getEntities();
+  }
+
+  @ApiOperation({
+    operationId: 'getFieldMappings',
+    summary: 'Retrieve field mappings',
+  })
+  @ApiResponse({ status: 200 })
+  @Get('attributes')
+  @UseGuards(ApiKeyAuthGuard)
+  getAttributes(@Request() req: any) {
+    const { id_project } = req.user;
+    return this.fieldMappingService.getAttributes(id_project);
   }
 
   @ApiOperation({
@@ -116,23 +179,6 @@ export class FieldMappingController {
     operationId: 'defineCustomField',
     summary: 'Create Custom Field',
   })
-  @ApiExcludeEndpoint()
-  @ApiBody({ type: CustomFieldCreateDto })
-  @ApiPostCustomResponse(CustomFieldResponse)
-  @Post('internal')
-  @UseGuards(JwtAuthGuard)
-  createInternalCustomField(
-    @Request() req: any,
-    @Body() data: CustomFieldCreateDto,
-  ) {
-    const { id_project } = req.user;
-    return this.fieldMappingService.createCustomField(data, id_project);
-  }
-
-  @ApiOperation({
-    operationId: 'defineCustomField',
-    summary: 'Create Custom Field',
-  })
   @ApiBody({ type: CustomFieldCreateDto })
   @ApiPostCustomResponse(CustomFieldResponse)
   @Post()
@@ -140,18 +186,6 @@ export class FieldMappingController {
   createCustomField(@Request() req: any, @Body() data: CustomFieldCreateDto) {
     const { id_project } = req.user;
     return this.fieldMappingService.createCustomField(data, id_project);
-  }
-
-  @ApiOperation({ operationId: 'map', summary: 'Map Custom Field' })
-  @ApiBody({ type: MapFieldToProviderDto })
-  @ApiPostCustomResponse(CustomFieldResponse)
-  @UseGuards(JwtAuthGuard)
-  @ApiExcludeEndpoint()
-  @Post('internal/map')
-  mapInternalFieldToProvider(
-    @Body() mapFieldToProviderDto: MapFieldToProviderDto,
-  ) {
-    return this.fieldMappingService.mapFieldToProvider(mapFieldToProviderDto);
   }
 
   @ApiOperation({ operationId: 'map', summary: 'Map Custom Field' })

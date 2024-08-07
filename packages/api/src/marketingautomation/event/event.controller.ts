@@ -27,12 +27,11 @@ import {
 } from './types/model.unified';
 import { ConnectionUtils } from '@@core/connections/@utils';
 import { ApiKeyAuthGuard } from '@@core/auth/guards/api-key.guard';
-import { FetchObjectsQueryDto } from '@@core/utils/dtos/fetch-objects-query.dto';
+import { QueryDto } from '@@core/utils/dtos/query.dto';
 import {
   ApiGetCustomResponse,
   ApiPaginatedResponse,
 } from '@@core/utils/dtos/openapi.respone.dto';
-
 
 @ApiTags('marketingautomation/events')
 @Controller('marketingautomation/events')
@@ -60,7 +59,7 @@ export class EventController {
   @Get()
   async getEvents(
     @Headers('x-connection-token') connection_token: string,
-    @Query() query: FetchObjectsQueryDto,
+    @Query() query: QueryDto,
   ) {
     try {
       const { linkedUserId, remoteSource, connectionId, projectId } =
@@ -123,10 +122,10 @@ export class EventController {
       );
     return this.eventService.getEvent(
       id,
-      linkedUserId,
-      remoteSource,
       connectionId,
       projectId,
+      linkedUserId,
+      remoteSource,
       remote_data,
     );
   }
