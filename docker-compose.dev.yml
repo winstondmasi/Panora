@@ -44,7 +44,7 @@ services:
       REDIS_USER: ${REDIS_USER}
       REDIS_PORT: ${REDIS_PORT}
       WEBAPP_URL: ${NEXT_PUBLIC_WEBAPP_DOMAIN}
-      #REDIS_TLS: 1 # set this variable to 1 when Redis is AWS hosted 
+      #REDIS_TLS: 1 # set this variable to 1 when Redis is AWS hosted
       REDIS_DB: ${REDIS_DB}
       ENCRYPT_CRYPTO_SECRET_KEY: ${ENCRYPT_CRYPTO_SECRET_KEY}
       HUBSPOT_CRM_CLOUD_CLIENT_ID: ${HUBSPOT_CRM_CLOUD_CLIENT_ID}
@@ -206,10 +206,10 @@ services:
 
   redis:
     image: valkey/valkey:7.2-alpine
-    container_name: 'Redis'
+    container_name: "Redis"
     command: valkey-server --requirepass ${REDIS_PASS}
     ports:
-      - '${REDIS_PORT}:${REDIS_PORT}'
+      - "${REDIS_PORT}:${REDIS_PORT}"
     volumes:
       - ./redis-data:/data
     networks:
@@ -220,7 +220,7 @@ services:
       timeout: 5s
       retries: 5
       start_period: 10s
-    
+
   webapp-nextjs:
     build:
       dockerfile: ./apps/webapp/Dockerfile.dev
@@ -232,7 +232,7 @@ services:
       NEXT_PUBLIC_BACKEND_DOMAIN: ${NEXT_PUBLIC_BACKEND_DOMAIN}
       NEXT_PUBLIC_MAGIC_LINK_DOMAIN: ${NEXT_PUBLIC_MAGIC_LINK_DOMAIN}
       NEXT_PUBLIC_WEBAPP_DOMAIN: ${NEXT_PUBLIC_WEBAPP_DOMAIN}
-      NEXT_PUBLIC_REDIRECT_WEBHOOK_INGRESS: ${REDIRECT_TUNNEL_INGRESS} 
+      NEXT_PUBLIC_REDIRECT_WEBHOOK_INGRESS: ${REDIRECT_TUNNEL_INGRESS}
     restart: unless-stopped
     ports:
       - 80:8090
@@ -291,7 +291,7 @@ services:
     volumes:
       - ./ngrok.yml:/etc/ngrok.yml
     ports:
-    - 4040:4040
+      - 4040:4040
     depends_on:
       api:
         condition: service_healthy
