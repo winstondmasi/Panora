@@ -4,14 +4,16 @@ export enum CrmConnectors {
     HUBSPOT = 'hubspot',
     PIPEDRIVE = 'pipedrive',
     ATTIO = 'attio',
-    CLOSE = 'close'
+    CLOSE = 'close',
+    MICROSOFTDYNAMICSSALES = 'microsoftdynamicssales'
 }
 
 export enum EcommerceConnectors {
     SHOPIFY = 'shopify',
     WOOCOMMERCE = 'woocommerce',
     SQUARESPACE = 'squarespace',
-    AMAZON = 'amazon'
+    AMAZON = 'amazon',
+    WEBFLOW = 'webflow'
 }
 
 export enum TicketingConnectors {
@@ -19,7 +21,8 @@ export enum TicketingConnectors {
     FRONT = 'front',
     JIRA = 'jira',
     GITHUB = 'github',
-    GITLAB = 'gitlab'
+    GITLAB = 'gitlab',
+    LINEAR = 'linear'
 }
 
 export enum FilestorageConnectors {

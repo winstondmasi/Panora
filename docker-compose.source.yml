@@ -231,6 +231,8 @@ services:
       dockerfile: ./apps/webapp/Dockerfile
       context: ./
       args:
+        NEXT_PUBLIC_POSTHOG_KEY: "phc_WhWJfNPOHAuWVdyTacGxrPa9JW54scnofA9KVEjFcFw"
+        NEXT_PUBLIC_POSTHOG_HOST: "https://us.i.posthog.com"
         NEXT_PUBLIC_DISTRIBUTION: ${DISTRIBUTION}
         NEXT_PUBLIC_BACKEND_DOMAIN: ${NEXT_PUBLIC_BACKEND_DOMAIN}
         NEXT_PUBLIC_MAGIC_LINK_DOMAIN: ${NEXT_PUBLIC_MAGIC_LINK_DOMAIN}
@@ -250,6 +252,8 @@ services:
     build:
       dockerfile: ./apps/magic-link/Dockerfile
       context: ./
+      args:
+        VITE_BACKEND_DOMAIN: ${NEXT_PUBLIC_BACKEND_DOMAIN}
     restart: always 
     ports:
       - 81:80
@@ -260,23 +264,6 @@ services:
       - backend
       - frontend
   
-  ngrok:
-    image: ngrok/ngrok:latest
-    restart: always
-    command:
-      - "start"
-      - "--all"
-      - "--config"
-      - "/etc/ngrok.yml"
-    volumes:
-      - ./ngrok.yml:/etc/ngrok.yml
-    ports:
-    - 4040:4040
-    #depends_on:
-      #api:
-        #condition: service_healthy
-    network_mode: "host"
-    
 networks:
   frontend:
   backend:

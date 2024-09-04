@@ -10,7 +10,7 @@ export const CONNECTORS_METADATA: ProvidersConfig = {
         urls: {
           docsUrl: 'https://developers.hubspot.com/docs/api/crm/understanding-the-crm',
           authBaseUrl: 'https://app-eu1.hubspot.com/oauth/authorize',
-          apiUrl: 'https://api.hubapi.com/crm',
+          apiUrl: 'https://api.hubapi.com',
           customPropertiesUrl: 'https://api.hubapi.com/properties/v1/contacts/properties',
         },
         logoPath: 'https://assets-global.website-files.com/6421a177cdeeaf3c6791b745/64d61202dd99e63d40d446f6_hubspot%20logo.png',
@@ -214,7 +214,7 @@ export const CONNECTORS_METADATA: ProvidersConfig = {
         },
         logoPath: 'https://play-lh.googleusercontent.com/MC_Aoa7rlMjGtcgAdiLJGeIm3-kpVw7APQmQUrUZtXuoZokiqVOJqR-bTu7idJBD8g',
         description: 'Sync & Create contacts, deals, companies, notes, engagements, stages, tasks and users',
-        active: false,
+        active: true,
         primaryColor: '#516EE2',
         options: {
           end_user_domain: true
@@ -458,7 +458,7 @@ export const CONNECTORS_METADATA: ProvidersConfig = {
         },
         logoPath: 'https://asset.brandfetch.io/iduDa181eM/idYYbqOlKi.png',
         description: 'Sync & Create accounts, tickets, comments, attachments, contacts, tags, teams and users',
-        active: false,
+        active: true,
         authStrategy: {
           strategy: AuthStrategy.oauth2
         }
@@ -2920,7 +2920,7 @@ export const CONNECTORS_METADATA: ProvidersConfig = {
         },
         logoPath: 'https://dailybrand.co.zw/wp-content/uploads/2023/10/webflow-2.png',
         description: 'Sync & Create orders, fulfillments, fulfillment orders, customers and products',
-        active: false,
+        active: true,
         authStrategy: {
           strategy: AuthStrategy.oauth2
         },

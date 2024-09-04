@@ -539,7 +539,7 @@ CREATE TABLE connector_sets
  tcg_front        boolean NULL,
  crm_zendesk      boolean NULL,
  crm_close        boolean NULL,
- fs_box           boolean NULL,
+ fs_box           boolean NULL, 
  tcg_github       boolean NULL,
  hris_gusto       boolean NULL,
  hris_deel        boolean NULL,
@@ -548,8 +548,11 @@ CREATE TABLE connector_sets
  ecom_shopify     boolean NULL,
  ecom_amazon      boolean NULL,
  ecom_squarespace boolean NULL,
+ tcg_linear       boolean NULL,
  ats_ashby        boolean NULL,
- CONSTRAINT PK_project_connector PRIMARY KEY ( id_connector_set )
+ ecom_webflow boolean NULL,
+ crm_microsoftdynamicssales boolean NULL,
+CONSTRAINT PK_project_connector PRIMARY KEY ( id_connector_set )
 );
 
 
@@ -1051,6 +1054,26 @@ CREATE INDEX FK_connectors_sets ON projects
 (
  id_connector_set
 );
+
+CREATE TABLE projects_pull_frequency
+(
+ id_projects_pull_frequency uuid NOT NULL,
+ crm                        bigint NULL,
+ ats                        bigint NULL,
+ hris                       bigint NULL,
+ ats                        bigint NULL,
+ accounting                 bigint NULL,
+ file_storage               bigint NULL,
+ ecommerce                  bigint NULL,
+ ticketing                  bigint NULL,
+ created_at                 timestamp with time zone NOT NULL DEFAULT NOW(),
+ modified_at                timestamp with time zone NOT NULL DEFAULT NOW(),
+ id_project                 uuid NOT NULL,
+CONSTRAINT PK_projects_pull_frequency PRIMARY KEY ( id_projects_pull_frequency )
+CONSTRAINT FK_projects_pull_frequency_project FOREIGN KEY ( id_project ) REFERENCES projects ( id_project )
+
+);
+
 
 COMMENT ON COLUMN projects.sync_mode IS 'Can be realtime or periodic_pull';
 COMMENT ON COLUMN projects.pull_frequency IS 'Frequency in seconds for pulls
